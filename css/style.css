@@ -1,0 +1,638 @@
+:root{
+    --Orange: hsl(26, 100%, 55%);
+    --Pale-orange: hsl(25, 100%, 94%);
+    
+    --Very-dark-blue: hsl(218, 12%, 13%);
+    --Dark-grayish-blue: hsl(219, 9%, 45%);
+    --Grayish-blue: hsl(220, 14%, 75%);
+    --Light-grayish-blue: hsl(223, 64%, 98%);
+    --White: hsl(0, 0%, 100%);
+    --Black: hsl(0, 0%, 0%); /*(with 75% opacity for lightbox background)*/
+}
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    font-family: "Kumbh Sans", sans-serif;
+    font-size: 16px;
+}
+
+button, p, span{
+    font-family: "Kumbh Sans", sans-serif
+}
+
+.overlay{
+    display: none;
+}
+
+.overlay2{
+    display: block;
+    background-color: black;
+    background: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 998;
+}
+
+.modal2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.mobile-menu-bg, .mobile-menu{
+    display: none;
+}
+
+.close-svg{
+    margin-left: auto;
+    width: 32%;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.modal-big-product{
+    position: relative;
+}
+
+.previous-svg, .next-svg{
+    position: absolute;
+    top: 50%;
+}
+
+.next-svg{
+    right: 27%;
+}
+
+.previous-svg{
+    left: 27%;
+}
+
+.modal-big-product div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    padding: 15px;
+    border-radius: 100px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.modal-big-product div:hover path{
+    stroke: #f19c5b;
+}
+
+.close-svg:hover path{
+    fill: #f19c5b;
+}
+
+.modal-big-product img{
+    width: 40%;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 50px;
+    margin-top: 20px;
+}
+
+.menu-and-logo{
+    display: flex;
+    align-items: center;
+}
+
+.cart-logo-and-avatar{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.cart-logo path{
+    fill: black;
+}
+
+.basket-svg-number{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 8px;
+    left: 10px;
+    color: white;
+    background-color: var(--Orange);
+    width: 18px;
+    height: 12px;
+    border-radius: 100px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.basket-container.show{
+    opacity: 100%;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.basket-container{
+    opacity: 0%;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    position: absolute;
+    background-color: white;
+    top: 50px;
+    left: -180px;
+    box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    width: 330px;
+    height: 280px;
+    z-index: 1;
+}
+
+.cart-txt{
+    font-size: 16px;
+    margin-left: 20px;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+.line{
+    background-color: var(--Grayish-blue);
+    width: 100%;
+    height: 1px;
+}
+
+.empty-txt{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 25vh;
+    font-weight: 700;
+    color: var(--Dark-grayish-blue);
+}
+
+.add-product-container{
+    display: none;
+    margin: 25px;
+}
+
+.add-product{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 11px;
+}
+
+.product1-basket{
+    width: 20%;
+    border-radius: 8px;
+}
+
+.product-name-and-numbers{
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+}
+
+.basket-numbers{
+    display: flex;
+    align-items: center;
+    column-gap: 7px;
+}
+
+.product-name, .single-price, .number-of-product{
+    font-size: 14px;
+    color: var(--Dark-grayish-blue);
+}
+
+.number-of-product{
+    font-size: 15px;
+}
+
+.single-price{
+    font-size: 16px;
+}
+
+.total-price{
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.checkout-btn{
+    background-color: var(--Orange);
+    border: none;
+    border-radius: 10px;
+    width: 100%;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 15px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.menu-and-logo ul{
+    display: flex;
+    column-gap: 30px;
+    list-style: none;
+    color: var(--Black);
+    opacity: 75%;
+    font-size: 15px;
+}
+
+.menu-and-logo ul li{
+    position: relative;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.menu-and-logo ul li::after{
+    content: '';
+    position: absolute;
+
+    bottom: -45px;
+    left: 50%;
+
+    width: 0;
+    height: 4px;
+
+    background-color: var(--Orange);
+
+    transform: translateX(-50%);
+
+}
+
+.menu-and-logo ul li:hover::after{
+    width: 50px;
+}
+
+.icon-menu{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.cart-logo-and-avatar{
+    display: flex;
+    column-gap: 40px;
+}
+
+.avatar{
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.avatar:hover{
+    border: 2px solid var(--Orange);
+    border-radius: 50px;
+}
+
+.cart-logo-and-avatar svg{
+    cursor: pointer;
+}
+
+.line-header{
+    margin: auto;
+    width: 93%;
+    height: 2px;
+    background-color: var(--Light-grayish-blue);
+    margin-top: 30px;
+}
+
+section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120vh;
+}
+
+.big-product, .modal-big-product{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.big-product img{
+    cursor: pointer;
+}
+
+.product1-big{
+    width: 60%;
+    border-radius: 15px;
+}
+
+.product2-big, .product3-big, .product4-big{
+    display: none;
+    width: 60%;
+    border-radius: 15px;
+}
+
+.small-product, .modal-small-product{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.small-product div, .modal-small-product div{
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    width: 130px;
+    transition: 0.3s ease;
+}
+
+.modal-small-product div{
+    width: 100px;
+}
+
+.small-product img, .modal-small-product img{
+    border-radius: 10px;
+    width: 70%;
+    margin-top: 25px;
+    cursor: pointer;
+    object-fit: cover;
+}
+
+.small-product img:hover, .modal-small-product img:hover{
+    opacity: 50%;
+    transform: translateY(-3px);
+}
+
+.sneaker-company{
+    color: var(--Black);
+    opacity: 75%;
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin-top: 0;
+}
+
+.product-info{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.product-info h2{
+    width: 400px;
+    font-size: 40px;
+    color: var(--Very-dark-blue);
+    margin-top: 8px;
+}
+
+.long-text{
+    color: var(--Black);
+    opacity: 70%;
+    width: 75%;
+    font-size: 15px;
+    line-height: 1.5;
+    margin-bottom: 30px;
+}
+
+.amount-section{
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
+}
+
+.discount-price{
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--Very-dark-blue);
+    margin: 0;
+}
+
+.amount-section button{
+    background-color: var(--Very-dark-blue);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 5px 2px;
+    width: 45px;
+    font-weight: 700;
+}
+
+.original-price{
+    text-decoration: line-through;
+    color: var(--Dark-grayish-blue);
+    font-weight: 700;
+}
+
+.cart-btn-and-plus-minus{
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.product-plus-minus{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 150px;
+    height: 50px;
+    column-gap: 20px;
+    background-color: var(--Light-grayish-blue);
+    font-weight: 700;
+    border-radius: 10px;
+    padding: 0px 10px;
+}
+
+.product-plus-minus svg{
+    cursor: pointer;
+}
+
+.product-plus-minus svg{
+    color: #f19c5b;
+}
+
+.add-cart-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 15px;
+    background-color: var(--Orange);
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    width: 250px;
+    height: 50px;
+    padding: 20px;
+    color: var(--Very-dark-blue);
+    cursor: pointer;
+}
+
+.add-cart-btn:hover{
+    background-color: hsl(26, 84%, 65%);
+}
+
+
+@media(max-width:1200px){
+    .small-product div{
+        width: 100px;
+    }
+}
+
+@media(max-width:750px){
+    .small-product div{
+        width: 130px;
+    }
+    section{
+        display: block;
+    }
+    .product-info{
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+        margin-top: 20px;
+    }
+    .product-info h2, .product-info p{
+        width: auto;
+    }
+    .menu-and-logo ul{
+        display: none;
+    }
+    .icon-menu{
+        display: flex;
+    }
+    
+    .mobile-menu-bg{
+        display: none;
+        position: relative;
+        background-color: black;
+        background: rgba(0, 0, 0, 0.7);
+        position: fixed;
+        inset: 0;
+        z-index: 998;
+    }
+    
+    .mobile-menu{
+        background-color: white;
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 250px;
+        padding: 25px;
+    }
+
+    .mobile-menu-bg.active{
+        display: block;
+    }
+    
+    .mobile-menu.active{
+        display: block;
+    }
+
+    .mobile-menu ul{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        row-gap: 20px;
+        list-style: none;
+        color: var(--Black);
+        font-size: 15px;
+        font-weight: 700;
+        margin-top: 40px;
+        padding-left: 0;
+    }
+    
+    .close-svg-menu, .mobile-menu li{
+        cursor: pointer;
+    }
+}
+
+@media(max-width:500px){
+    .small-product div{
+        width: 70px;
+    }
+    .modal-big-product img{
+        width: 80%;
+    }
+    .modal-big-product div{
+        width: 45px;
+        height: 45px;
+    }
+    .modal-small-product div{
+        width: 90px;
+    }
+}
+
+@media(max-width:375px){
+    body{
+        margin: 0;
+    }
+    .header{
+        padding: 0 25px;
+        margin: 20px 0;
+    }
+    .cart-logo-and-avatar{
+        column-gap: 20px;
+    }
+    .avatar{
+        width: 30px;
+        height: 30px;
+    }
+    .line-header{
+        display: none;
+    }
+    .big-product img{
+        width: 100%;
+        border-radius: 0;
+    }
+    .product-info{
+        align-items: baseline;
+        justify-content: baseline;
+        text-align: start;
+        width: 90%;
+        margin: 20px;
+    }
+    .product-info h2, .product-info p{
+        width: auto;
+    }
+    .amount-section-with-original-price{
+        display: flex;
+        column-gap: 120px;
+        margin-bottom: 20px;
+    }
+    .cart-btn-and-plus-minus{
+        display: block;
+    }
+    .product-plus-minus{
+       width: 330px;
+    }
+    .add-cart-btn{
+        width: 330px;
+        margin-top: 15px;
+    }
+    .sneaker-company{
+        font-size: 13px;
+    }
+    .product-info h2{
+        font-size: 28px;
+    }
+    .modal-small-product div{
+        width: 90px;
+    }
+    .next-svg{
+        right: 5%;
+    }
+    .previous-svg{
+        left: 5%;
+    }
+    .close-svg{
+        width: 15%;
+    }
+}
