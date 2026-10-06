@@ -39,6 +39,46 @@ function totalPrc(){
     totalPrice.textContent = `$${total.toFixed(2)}`;
 }
 
+function showImage(index) {
+    currentIndex = index;
+
+    // عکس‌های بزرگ اصلی
+    bigImages.forEach((image, i) => {
+        if (i === index) {
+            image.style.display = 'block';
+        } else {
+            image.style.display = 'none';
+        }
+    });
+
+    // thumbnail های اصلی
+    smallImages.forEach((image, i) => {
+        if (i === index) {
+            image.style.opacity = '25%';
+        } else {
+            image.style.opacity = '100%';
+        }
+    });
+
+    // عکس‌های بزرگ داخل modal
+    modalBigProducts.forEach((image, i) => {
+        if (i === index) {
+            image.style.display = 'block';
+        } else {
+            image.style.display = 'none';
+        }
+    });
+
+    // thumbnail های داخل modal
+    modalSmallProducts.forEach((image, i) => {
+        if (i === index) {
+            image.style.opacity = '25%';
+        } else {
+            image.style.opacity = '100%';
+        }
+    });
+}
+
 let count = 0;
 btn.addEventListener('click', ()=>{
     count++;
@@ -91,15 +131,7 @@ smallImages[0].style.opacity = '25%';
 
 smallImages.forEach((smallImage, index)=>{
     smallImage.addEventListener('click', ()=>{
-        bigImages.forEach(image =>{
-            image.style.display = 'none'
-        })
-        bigImages[index].style.display = 'block'
-
-        smallImages.forEach((image)=>{
-            image.style.opacity = '100%';
-            smallImage.style.opacity = '25%';
-        })
+        showImage(index);
     })
 });
 
@@ -114,15 +146,7 @@ modalSmallProducts[0].style.opacity = '25%';
 
 modalSmallProducts.forEach((smallImage, index)=>{
     smallImage.addEventListener('click', ()=>{
-        modalBigProducts.forEach(image =>{
-            image.style.display = 'none'
-        })
-        modalBigProducts[index].style.display = 'block'
-
-        modalSmallProducts.forEach((image)=>{
-            image.style.opacity = '100%';
-            smallImage.style.opacity = '25%';
-        })
+        showImage(index);
     })
 });
 
@@ -135,11 +159,7 @@ nextSvg.addEventListener('click', ()=>{
         currentIndex = 0;
     }
 
-    modalBigProducts.forEach((modalBigProduct)=>{
-        modalBigProduct.style.display = 'none'
-    })
-
-    modalBigProducts[currentIndex].style.display = 'block';
+    showImage(currentIndex)
 });
 
 previousSvg.addEventListener('click', ()=>{
@@ -150,11 +170,7 @@ previousSvg.addEventListener('click', ()=>{
         currentIndex = 3;
     }
 
-    modalBigProducts.forEach((modalBigProduct)=>{
-        modalBigProduct.style.display = 'none'
-    })
-
-    modalBigProducts[currentIndex].style.display = 'block';
+    showImage(currentIndex)
 });
 
 closeSvg.addEventListener('click', ()=>{
